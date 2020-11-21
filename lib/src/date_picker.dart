@@ -77,8 +77,7 @@ class DatePicker {
               : DateTimePickerMode.date;
         }
       } else {
-        if (pickerMode == DateTimePickerMode.date ||
-            pickerMode == DateTimePickerMode.datetime) {
+        if (pickerMode == DateTimePickerMode.date || pickerMode == DateTimePickerMode.datetime) {
           pickerMode = DateTimePickerMode.time;
         }
       }
@@ -100,9 +99,8 @@ class DatePicker {
         onCancel: onCancel,
         onChange: onChange,
         onConfirm: onConfirm,
-        theme: Theme.of(context, shadowThemeOnly: true),
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        theme: Theme.of(context),
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         minuteDivider: minuteDivider,
       ),
     ).whenComplete(onClose ?? () => {});
@@ -158,14 +156,13 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController =
-        BottomSheet.createAnimationController(navigator.overlay);
+    _animationController = BottomSheet.createAnimationController(navigator.overlay);
     return _animationController;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     double height = pickerTheme.pickerHeight;
     if (pickerTheme.title != null || pickerTheme.showTitle) {
       height += pickerTheme.titleHeight;
@@ -197,8 +194,7 @@ class _DatePickerComponent extends StatelessWidget {
     switch (route.pickerMode) {
       case DateTimePickerMode.date:
         pickerWidget = DatePickerWidget(
-          onMonthChangeStartWithFirstDate:
-              route.onMonthChangeStartWithFirstDate,
+          onMonthChangeStartWithFirstDate: route.onMonthChangeStartWithFirstDate,
           minDateTime: route.minDateTime,
           maxDateTime: route.maxDateTime,
           initialDateTime: route.initialDateTime,
@@ -245,8 +241,8 @@ class _DatePickerComponent extends StatelessWidget {
         builder: (BuildContext context, Widget child) {
           return new ClipRect(
             child: new CustomSingleChildLayout(
-              delegate: new _BottomPickerLayout(route.animation.value,
-                  contentHeight: _pickerHeight),
+              delegate:
+                  new _BottomPickerLayout(route.animation.value, contentHeight: _pickerHeight),
               child: pickerWidget,
             ),
           );
